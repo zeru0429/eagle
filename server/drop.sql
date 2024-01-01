@@ -1,0 +1,10 @@
+USE huludeig_order;
+
+-- Drop tables
+DROP TABLE IF EXISTS singleOrder;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS profile;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS waiter;
+DROP TABLE IF EXISTS foods;
+DROP TABLE IF EXISTS category;

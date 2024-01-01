@@ -2,9 +2,9 @@ const query = require('../config/db');
 const loginQuery = require('../querys/login.query');
 
 const loginService = {
-   login: async (data)=>{
+  getUserByUsername: async (data)=>{
      try{
-      const rows = await query(loginQuery.getUserByUsername,[username]);
+      const rows = await query(loginQuery.getUserByUsername,[data]);
       return rows;
      }
      catch(e){
@@ -12,7 +12,19 @@ const loginService = {
       return null;
      }
 
-   }
+   },
+   getUserByUserId: async (data)=>{
+    try{
+     const rows = await query(loginQuery.getUserByUserId,[data]);
+     return rows;
+    }
+    catch(e){
+     console.log(e);
+     return null;
+    }
+
+  },
+
 
    }
 

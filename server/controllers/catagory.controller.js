@@ -32,17 +32,17 @@ const categoryController ={
       }
       res.status(200).json({
          sucess: true,
-         data: "category delated sucessfully"
+         message: "category delated sucessfully"
       })
    
 
    },
 
    updateCategory: async (req,res)=>{
-
       const id = req.params.id.substring(1);
-      const {categoryName, amharicName } = req.body;
-    
+     
+      const {categoryName,amharicName } = req.body;
+      // console.log(categoryName,amharicName,id);
       if(!categoryName || !amharicName || !id){
          return res.status(500).json({
             success: false,

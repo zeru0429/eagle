@@ -112,7 +112,7 @@ const waiterController = {
             });
          }
 
-         const createdWaiter = await waiterService.createSingleWaiter({ fullName });
+         const createdWaiter = await waiterService.createSingleWaiter( fullName);
 
          if (!createdWaiter) {
             return res.status(500).json({

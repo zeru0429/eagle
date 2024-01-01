@@ -9,7 +9,7 @@ const orderController ={
    },
 
    getAllorderInfo: async (req,res)=>{
-      const rows = await orderService.getAllOrderInfo();
+      const rows = await orderService.getAllOrdersInfo();
       res.status(200).json({
          sucess: true,
          data: rows

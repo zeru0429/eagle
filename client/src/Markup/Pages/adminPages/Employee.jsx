@@ -7,10 +7,10 @@ import ButtonMUI from '@mui/material/Button';
 
 const columns = [
   { field: 'userId', headerName: 'ID', width: 70 },
-  { field: 'username', headerName: 'Username', width: 100 },
+  { field: 'username', headerName: 'Username', width: 150 },
   { field: 'role', headerName: 'Role', width: 100 },
-  { field: 'firstname', headerName: 'First Name', width: 100 },
-  { field: 'lastname', headerName: 'Last Name', width: 100 },
+  { field: 'firstname', headerName: 'First Name', width: 120 },
+  { field: 'lastname', headerName: 'Last Name', width: 120 },
   { field: 'gender', headerName: 'Gender', width: 100 },
   {
     field: 'actions',
@@ -23,6 +23,7 @@ const columns = [
       const [firstName, setFirstName] = useState(params.row.firstname);
       const [lastName, setLastName] = useState(params.row.lastname);
       const [gender, setGender] = useState(params.row.gender);
+      const [password,setPassword] = useState();
 
       const handleEdit = () => {
         setUserName(params.row.username);
@@ -34,19 +35,25 @@ const columns = [
       };
 
       const handleSave = async () => {
-        console.log('Save user:', params.row.userId, userName);
-        const response = await axios.put(`api/users/:${params.row.userId}`, {
+        console.log('Save user222222:', params.row.userId, userName);
+ 
+        const response = await axios.put(`api/user/:${params.row.userId}`, {
           username: userName,
           role: role,
           firstname: firstName,
           lastname: lastName,
+          password: password,
           gender: gender
         });
 
+
         if (response.data.success) {
           window.alert(response.data.message);
+      
           setOpen(false);
           fetchData();
+        
+      
         } else {
           console.log(response.data.message);
         }
@@ -55,7 +62,7 @@ const columns = [
       const handleDelete = async () => {
         console.log('Delete user:', params.row.userId);
         const response = await axios.delete(`api/user/:${params.row.userId}`);
-
+        
         if (response.data.success) {
           window.alert(response.data.message);
           fetchData();
@@ -84,9 +91,20 @@ const columns = [
             <DialogContent>
             <br />
               <TextField
+                required
                 label="Username"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
+                fullWidth
+              />
+              <br /><br />
+              <TextField
+              
+                required
+                label="Password"
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 fullWidth
               />
               <br /><br />
@@ -103,6 +121,7 @@ const columns = [
               </FormControl>
               <br /><br />
               <TextField
+                required
                 label="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -110,6 +129,7 @@ const columns = [
               />
               <br /><br />
               <TextField
+                required
                 label="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -202,6 +222,7 @@ const Users = () => {
           <DialogContent>
             <TextField
               required
+             
               label="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -211,6 +232,7 @@ const Users = () => {
             <TextField
               required
               type='password'
+            
               label="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -231,6 +253,7 @@ const Users = () => {
             <br /><br />
             <TextField
               required
+         
               label="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -239,6 +262,7 @@ const Users = () => {
             <br /><br />
             <TextField
               required
+            
               label="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}

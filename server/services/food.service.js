@@ -4,7 +4,7 @@ const foodQuery = require('../querys/food.query');
 const foodService = {
    getAllfood: async ()=>{
      try{
-      const rows = await query(foodQuery.getAllfood);
+      const rows = await query(foodQuery.getAllFood);
       return rows;
      }
      catch(e){
@@ -15,7 +15,7 @@ const foodService = {
    },
    getSinglefood: async (id)=>{
       try{
-       const rows = await query(foodQuery.getSinglefood,[id]);
+       const rows = await query(foodQuery.getSingleFood,[id]);
        return rows;
       }
       catch(e){
@@ -27,7 +27,7 @@ const foodService = {
 
     updateSinglefood: async (id)=>{
       try{
-       const rows = await query(foodQuery.updateSinglefood,[id]);
+       const rows = await query(foodQuery.updateSingleFood,[id]);
        return rows;
       }
       catch(e){
@@ -39,7 +39,7 @@ const foodService = {
 
     deleteSinglefood: async (id)=>{
       try{
-       const rows = await query(foodQuery.deleteSinglefood,[id]);
+       const rows = await query(foodQuery.deleteSingleFood,[id]);
        return rows;
       }
       catch(e){
@@ -51,7 +51,7 @@ const foodService = {
 
     createSinglefood: async (data)=>{
       try{
-       const rows = await query(foodQuery.createSinglefood,[data.englishName,data.amharicName]);
+       const rows = await query(foodQuery.createSingleFood[data.categoryId,data.foodName, data.amharicName, data.price,data.imageurl]);
        return rows;
       }
       catch(e){
@@ -61,7 +61,17 @@ const foodService = {
  
     },
 
-
+    getAllFoodByCategory:  async (id)=>{
+      try{
+       const rows = await query(foodQuery.getAllFoodByCategory,[id]);
+       return rows;
+      }
+      catch(e){
+       console.log(e);
+       return null;
+      }
+ 
+    },
 
 
 }

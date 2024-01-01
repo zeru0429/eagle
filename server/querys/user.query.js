@@ -8,6 +8,7 @@ const userQuery = {
    deleteSingleUsers: `delete from users where userId = ?;`,
    deleteSingleUsersProfile: `delete from profile where userId = ?;`,
    updateSingleUsers: `update users set username = ?, password = ? where userId = ?;`,
+   updateSingleUsersProfile: `UPDATE profile SET firstname = ?, lastname = ?, gender = ? WHERE userId = ?;`,
    createSingleUsers: `insert into users (username, password,role) values (?, ?,?);`,
 
    createSingleUserProfile:`INSERT INTO huludeig_order.profile (userId,firstName,lastName,gender) VALUES(?,?,?,?);`,

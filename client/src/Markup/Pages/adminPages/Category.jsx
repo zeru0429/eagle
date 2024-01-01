@@ -26,7 +26,7 @@ const columns = [
 
       const handleSave = async () => {
         console.log('Save category:', params.row.categoryId, categoryName, amharicName);
-        const response = await axios.put(`api/catagory/${params.row.categoryId}`, { categoryName, amharicName });
+        const response = await axios.put(`api/catagory/:${params.row.categoryId}`, { categoryName, amharicName });
 
         if (response.data.success) {
           window.alert(response.data.message);
@@ -40,12 +40,13 @@ const columns = [
 
       const handleDelete = async () => {
         console.log('Delete category:', params.row.categoryId);
-        const response = await axios.delete(`api/catagory/${params.row.categoryId}`);
+        const response = await axios.delete(`api/catagory/:${params.row.categoryId}`);
 
         if (response.data.success) {
           window.alert(response.data.message);
           fetchData();
         } else {
+          console.log(response.data.message);
           console.log(response.data.message);
         }
       };

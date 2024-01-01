@@ -15,7 +15,9 @@ const userController ={
    },
 
    getAlluserInfo: async (req,res)=>{
-      const rows = await  userService.getAlluserInfo();
+      const rows = await  userService.getAllUsersInfo();
+     
+    
       res.status(200).json({
          sucess: true,
          data: rows
@@ -42,7 +44,7 @@ const userController ={
             message: `user is not found to delete`
          })
       }
-      const isDelatedProfile = await userService.deleteSingleuserProfile(id);
+      const isDelatedProfile = await userService.deleteSingleUsersProfile(id);
 
       const isDelated = await userService.deleteSingleuser(id);
       
@@ -62,45 +64,42 @@ const userController ={
    },
 
    updateuser: async (req,res)=>{
-      const id = req.params.id.substring(1);
-      const {username, password } = req.body;
+       const id = req.params.id.substring(1);
+      const {username, password ,role,lastname,firstname,gender} = req.body;
+      // console.log({username, password ,role,lastname,firstname,gender} );
 
-      if(!username || !password || !id){
+
+      if(!username || !password || !id || !role || !lastname ||!firstname || !gender){
          return res.status(500).json({
             success: false,
             message: 'all fields are required '
           });
        }
+       req.body.id = id;
+       const isUserUpdated = await userService.updateSingleuser(req.body); 
+  
+       const isUserProfileUpdated = await userService.updateSingleuserProfile(req.body);
 
-       req.body.categoryId = id;
-    const isUserUpdated = await userService.updateSingleuser(req.body); 
-
-    if(!isUserUpdated){
-      return res.status(500).json({
-          success: false,
-          message: 'fail to  update user '
-        });
-     }
-     
-     return res.status(200).json({
+       console.log(isUserProfileUpdated);
+      return res.status(200).json({
        success: true,
        message: 'user updated sucessfully'
-     });
- 
-
+      });
 
    },
 
    createuser: async (req,res)=>{
       const {username, password,firstName,lastName,gender ,role} = req.body;
+     
       if(!password	 || !username || !firstName || !lastName || !gender || !role ){
         return res.status(500).json({
            success: false,
            message: 'all fields are required '
          });
       }
-      const userNameIsUsed = await userService.getSingleuserByUserName(username);
-      if(userNameIsUsed){
+      const userNameIsUsed = await userService.getSingleUserByUsername(username);
+    
+      if(userNameIsUsed.length){
          return res.status(500).json({
             success: false,
             message: 'username is alredy taken '
@@ -112,11 +111,10 @@ const userController ={
          // encript password
          const saltRounds = 10; // Specify a number of rounds
          const salt = bcrypt.genSaltSync(saltRounds);
-         req.body.password = bcrypt.hashSync(password, salt);
-
+        req.body.password = bcrypt.hashSync(password, salt);
+         
          const isUserAdded = await userService.createSingleuser(req.body); 
-     
-        
+         
          if(!isUserAdded){
          return res.status(500).json({
             success: false,
@@ -127,8 +125,8 @@ const userController ={
              req.body.userId = isUserAdded.insertId;
              
             //profile section
-            const isUserProfileAdded = await userService.createSingleuserProfile(req.body); 
-            console.log(isUserProfileAdded);
+            const isUserProfileAdded = await userService.createSingleUserProfile(req.body); 
+            
               return res.status(200).json({
          success: true,
          message: 'user added sucessfully'

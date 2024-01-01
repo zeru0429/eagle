@@ -7,7 +7,7 @@ import ButtonMUI from '@mui/material/Button';
 
 const columns = [
   { field: 'waiterId', headerName: 'ID', width: 70 },
-  { field: 'fullName', headerName: 'Full Name', width: 130 },
+  { field: 'fullName', headerName: 'Full Name', width: 180 },
   {
     field: 'actions',
     headerName: 'Actions',

@@ -73,10 +73,11 @@ const foodController ={
 
    createfood: async (req,res)=>{
       const newFileName = `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/uploads/`+req.file.filename;
-      req.body.imageUrl = newFileName;
-
+      req.body.imageUrl = newFileName.toString();
+     
       
     const {foodName, amharicName , price, categoryId} = req.body;
+    console.log({foodName, amharicName , price, categoryId,newFileName});
     if(!foodName || !amharicName || !price || !categoryId){
       return res.status(500).json({
          success: false,

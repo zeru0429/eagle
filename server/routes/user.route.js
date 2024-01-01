@@ -8,8 +8,8 @@ userRoutes.get('/api/user',userController.getAlluser);
 
 userRoutes.get('/api/user',userController.getSingluser);
 userRoutes.get('/api/usersInfo',userController.getAlluserInfo);
-userRoutes.get('/api/user/:id',userController.updateuser);
-userRoutes.put('/api/user/:id',userController.getAlluser);
+userRoutes.get('/api/user/:id',userController.getSingluser);
+userRoutes.put('/api/user/:id',userController.updateuser);
 userRoutes.post('/api/user',userController.createuser);
 userRoutes.delete('/api/user/:id',userController.deleteuser);
 
