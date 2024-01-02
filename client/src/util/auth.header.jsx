@@ -6,13 +6,15 @@ const employeeAuthHeader = async () => {
     employee_first_name: "",
     employee_role: "",
   };
+
+  
   if (employee && employee) {
     const decodedToken = await decodeTokenPayload(employee);
-    // console.log(decodedToken);
+
     empValue.employee_role = decodedToken.employee_role;
     empValue.employee_id = decodedToken.employee_id;
     empValue.employee_first_name = decodedToken.employee_first_name;
-    // console.log(empValue);
+    //console.log(empValue);
     return empValue;
   } else {
     return null;
@@ -30,7 +32,7 @@ const employeeAuthHeader = async () => {
 // decode it from Base64Url encoding, and then convert the decoded payload into a JavaScript object
 //for further use and manipulation
 
-const decodeTokenPayload = (token) => {
+export const decodeTokenPayload = (token) => {
   const base64Url = token.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const jsonPayload = decodeURIComponent(

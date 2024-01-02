@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import './Login.css';
 import AuthService from '../../../services/AuthService';
+import { AuthContext } from '../../../Contexts/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee } =
+  useContext(AuthContext);
+  const navigator = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-       //validatetion
-       AuthService.login(username,password);
+    //validatetion
+    const islog = await AuthService.login(username, password);
+  
+    if (islog) {
+      setIsAdmin(islog.employee_role === 'admin');
+      setIsLogged(true); // Fix this line
+  
+      if (isLogged && isAdmin) {
+        console.log(employee);
+        navigator('/admin/users');
+      } else if (isLogged) {
+        console.log("object");
+        navigator('/');
+      }
+    }
   };
-
+  
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -22,6 +40,17 @@ const Login = () => {
 
 
   };
+
+  useEffect(() => {
+    if (isLogged && isAdmin) {
+      console.log(employee);
+      navigator('/admin/users');
+    } else if (isLogged) {
+      console.log("object");
+      navigator('/');
+    }
+  }, [isLogged, isAdmin, navigator, employee]);
+  
 
   return (
     <>

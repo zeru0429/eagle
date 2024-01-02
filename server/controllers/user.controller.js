@@ -57,7 +57,7 @@ const userController ={
       }
       res.status(200).json({
          sucess: true,
-         data: "User delated sucessfully"
+         message: "User delated sucessfully"
       })
    
 
@@ -76,11 +76,16 @@ const userController ={
           });
        }
        req.body.id = id;
+                // encript password
+      const saltRounds = 10; // Specify a number of rounds
+      const salt = bcrypt.genSaltSync(saltRounds);
+      req.body.password = bcrypt.hashSync(password, salt);
+
        const isUserUpdated = await userService.updateSingleuser(req.body); 
   
        const isUserProfileUpdated = await userService.updateSingleuserProfile(req.body);
 
-       console.log(isUserProfileUpdated);
+
       return res.status(200).json({
        success: true,
        message: 'user updated sucessfully'

@@ -11,22 +11,26 @@ export const AuthProvider = ({ children }) => {
   const [employee, setEmployee] = useState({});
 
   const value = { isLogged, isAdmin, setIsAdmin, setIsLogged, employee };
-
   useEffect(() => {
-    // retrieving data from browser local database
     const fetchToken = async () => {
       const isEmployee = await employeeAuthHeader();
-      // console.log(isEmployee);
       if (isEmployee) {
         setIsLogged(true);
         setEmployee(isEmployee);
-        if (isEmployee.employee_role === "Admin") {
+        if (isEmployee.employee_role === "admin") {
           setIsAdmin(true);
         }
       }
     };
+  
     fetchToken();
-  }, []);
+  }, [setIsLogged, setEmployee, setIsAdmin]);
+  
+
+  // Log the updated state whenever the employee state changes
+  useEffect(() => {
+   // console.log(employee);
+  }, [employee]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

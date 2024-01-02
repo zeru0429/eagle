@@ -23,15 +23,20 @@ const columns = [
 
       const handleSave = async () => {
         console.log('Save Waiter:', params.row.waiterId, waiterName);
-        const response = await axios.put(`api/waiters/:${params.row.waiterId}`, { fullName: waiterName });
+        try {
+          
+          const response = await axios.put(`api/waiters/:${params.row.waiterId}`, { fullName: waiterName });
 
         if (response.data.success) {
           window.alert(response.data.message);
           setOpen(false);
 
           fetchData();
-        } else {
-          console.log(response.data.message);
+        }
+
+        } catch (e) {
+          window.alert(e.response.data.message);
+          
         }
       };
 

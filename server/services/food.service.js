@@ -51,7 +51,7 @@ const foodService = {
 
     createSinglefood: async (data)=>{
       try{
-       const rows = await query(foodQuery.createSingleFood[data.categoryId,data.foodName, data.amharicName, data.price,data.imageurl]);
+       const rows = await query(foodQuery.createSingleFood,[data.categoryId,data.foodName, data.amharicName, data.price,data.imageUrl ]);
        return rows;
       }
       catch(e){

@@ -36,39 +36,47 @@ const columns = [
 
       const handleSave = async () => {
         console.log('Save user222222:', params.row.userId, userName);
- 
-        const response = await axios.put(`api/user/:${params.row.userId}`, {
-          username: userName,
-          role: role,
-          firstname: firstName,
-          lastname: lastName,
-          password: password,
-          gender: gender
-        });
+        try
+        {
+          const response = await axios.put(`api/user/:${params.row.userId}`, {
+            username: userName,
+            role: role,
+            firstname: firstName,
+            lastname: lastName,
+            password: password,
+            gender: gender
+          });
+  
+  
+          if (response.data.success) {
+            window.alert(response.data.message);
+            setOpen(false);
+            fetchData();      
+          } 
 
 
-        if (response.data.success) {
-          window.alert(response.data.message);
-      
-          setOpen(false);
-          fetchData();
-        
-      
-        } else {
-          console.log(response.data.message);
+        }catch(e){
+          window.alert(e.response.data.message);
         }
+
       };
 
       const handleDelete = async () => {
         console.log('Delete user:', params.row.userId);
+       try {
         const response = await axios.delete(`api/user/:${params.row.userId}`);
         
         if (response.data.success) {
           window.alert(response.data.message);
           fetchData();
         } else {
-          console.log(response.data.message);
+          window.alert(response.data.message);
         }
+        
+       } catch (e) {
+        window.alert(e.response.data.message);
+        
+       }
       };
 
       const handleClose = () => {

@@ -77,7 +77,7 @@ const foodController ={
      
       
     const {foodName, amharicName , price, categoryId} = req.body;
-    console.log({foodName, amharicName , price, categoryId,newFileName});
+    //console.log({foodName, amharicName , price, categoryId,newFileName});
     if(!foodName || !amharicName || !price || !categoryId){
       return res.status(500).json({
          success: false,
@@ -85,7 +85,7 @@ const foodController ={
        });
     }
 
-    const isfoodAdded = await foodService.createSinglefood(req.body); 
+   const isfoodAdded = await foodService.createSinglefood(req.body); 
     if(!isfoodAdded){
      return res.status(500).json({
          success: false,

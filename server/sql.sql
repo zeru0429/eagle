@@ -61,3 +61,9 @@ CREATE TABLE IF NOT EXISTS singleOrder (
 );
 
 
+SELECT * from orders;
+
+SELECT * FROM `singleOrder`;
+
+SELECT * FROM foods;
+SELECT * FROM users;
