@@ -1,11 +1,17 @@
-.product-card {
-    margin-bottom: 20px;
-}
 
-.product-card img {
-    width: 100px;
-    height: auto;
+.drinkPage{
+    width: 80%;
+    margin-bottom: 0px !important;
 }
-.Drinks{
-    width: 100%;
+.Drink{
+    display: flex;
+    margin-bottom: 0px !important;
+}
+.itemDescription{
+    margin-left: 16px;
+    margin-bottom: 0px !important;
+
+}
+.addedbuttem{
+float: right;
 }

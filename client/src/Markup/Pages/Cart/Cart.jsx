@@ -1,7 +1,7 @@
 import React from 'react'
 import Product from '../../Components/Product'
 import Orders from '../../Components/Order/Orders'
-
+import Carts from '../../Components/cart/Carts';
 import imgpizza from '../../../assets/images/pizza.jpeg';
 import imgburger from '../../../assets/images/burger.jpeg';
 import imgspagetii from '../../../assets/images/spageti.jpeg';
@@ -23,97 +23,46 @@ const Cart = () => {
                         <div className="col align-self-center text-right text-muted">3 items</div>
                     </div>
                 </div>
-                <div className="row border-top border-bottom">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgpizza}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Pizza</div>
-                            <div className="row">Margarita Pizza</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgburger}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Burger</div>
-                            <div className="row">Special Burger</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
-                <div className="row border-top border-bottom">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgpizza}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Pizza</div>
-                            <div className="row">Margarita Pizza</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgburger}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Burger</div>
-                            <div className="row">Special Burger</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
-                <div className="row border-top border-bottom">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgpizza}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Pizza</div>
-                            <div className="row">Margarita Pizza</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgburger}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Burger</div>
-                            <div className="row">Special Burger</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
-                <div className="row border-top border-bottom">
-                    <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={imgspagetii}/></div>
-                        <div className="col">
-                            <div className="row text-muted">Spagetii</div>
-                            <div className="row">Spagetii</div>
-                        </div>
-                        <div className="col">
-                            <a href="#">-</a><a href="#" className="border">1</a><a href="#">+</a>
-                        </div>
-                        <div className="col">44.00 <span className="close">Birr</span></div>
-                    </div>
-                </div>
+                <Carts 
+                 name="Burger"
+                 specificName="margarita pizza"
+                 price="200"
+                 resimg={imgburger}
+                />
+                <Carts 
+                 name="Burger"
+                 specificName="margarita pizza"
+                 price="200"
+                 resimg={imgpizza}
+                />
+                <Carts 
+                 name="Burger"
+                 specificName="margarita pizza"
+                 price="200"
+                 resimg={imgspagetii}
+                />
+                <Carts 
+                 name="Burger"
+                 specificName="margarita pizza"
+                 price="200"
+                 resimg={imgburger}
+                />
+                <Carts 
+                 name="Burger"
+                 specificName="margarita pizza"
+                 price="200"
+                 resimg={imgpizza}
+                />
+                <Carts 
+                 name="Burger"
+                 specificName="margarita pizza"
+                 price="200"
+                 resimg={imgspagetii}
+                />
+                
+
+
+               
                 <div className="back-to-shop"><span className="text-muted">Back to shop</span></div>
             </div>
             <div className="col-md-4 summary">
