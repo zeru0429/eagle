@@ -23,6 +23,7 @@ import Category from './Markup/Pages/adminPages/Category'
  import Employee from './Markup/Pages/adminPages/Employee'
  import FoodAdd from './Markup/Pages/adminPages/FoodAd'
 import Waiters from './Markup/Pages/adminPages/Waiters'
+import Home from './Markup/Pages/Home'
 // import Waitter from './Markup/Pages/adminPages/Waitter'
 
 
@@ -32,8 +33,14 @@ function App() {
     <>
     <Header />
     <Routes>
-      <Route
+
+    <Route
       path='/'
+      element={<> <Home /> </>}
+      />
+
+      <Route
+      path='/menu'
       element={<>   <Sidebar/> <Menu /> </>}
       />
       <Route
