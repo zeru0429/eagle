@@ -1,5 +1,8 @@
 const foodQuery = {
-   getAllFood: `select * from foods;`,
+   getAllFood: `SELECT foods.*, category.categoryName AS categoryName
+   FROM foods
+   JOIN category ON foods.categoryId = category.categoryId;
+   ;`,
    getAllFoodByCategory: `select * from foods where categoryId = ?;`,
    getSingleFood: `select * from foods where foodId = ?;`,
    deleteSingleFood: `delete from foods where foodId = ?;`,

@@ -1,15 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from '../../Components/DataTable/DataTable';
 import axios from '../../../util/axios';
-import { IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Input, MenuItem } from '@mui/material';
+import {
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  Input,
+  MenuItem,
+} from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
 import ButtonMUI from '@mui/material/Button';
+import { Avatar } from '@mui/material';
 
 const columns = [
   { field: 'foodId', headerName: 'ID', width: 70 },
+  {
+    field: 'imageUrl',
+    headerName: 'Image',
+    width: 130,
+    renderCell: (params) => (
+      <Avatar
+        alt={params.row.foodName}
+        src={params.row.imageUrl}
+      />
+    ),
+  },
   { field: 'foodName', headerName: 'English Name', width: 130 },
   { field: 'amharicName', headerName: 'Amharic Name', width: 130 },
-  { field: 'categoryId', headerName: 'Category ID', width: 130 }, // Corrected field name
+  {
+    field: 'categoryId',
+    headerName: 'Category ID',
+    width: 130,
+    renderCell: (params) => params.row.categoryName,
+  },
   { field: 'price', headerName: 'Price', width: 130 },
   {
     field: 'actions',
@@ -20,19 +47,29 @@ const columns = [
       const [foodName, setFoodName] = useState(params.row.foodName);
       const [amharicName, setAmharicName] = useState(params.row.amharicName);
       const [price, setPrice] = useState(params.row.price);
+      const [imageUrl, setImageUrl] = useState(params.row.imageUrl);
       const [categoryId, setCategoryId] = useState(params.row.categoryId);
+      const [categoryName, setCategoryName] = useState(params.row.categoryName);
+      const [categoryList, setCategoryList] = useState([]);
+      
+      useEffect(()=>{
+        fetchCategory();
+      },[]);
+
 
       const handleEdit = () => {
         setFoodName(params.row.foodName);
+        setImageUrl(params.row.imageUrl);
         setAmharicName(params.row.amharicName);
         setPrice(params.row.price);
         setCategoryId(params.row.categoryId);
+        setCategoryName(params.row.categoryName);
         setOpen(true);
       };
 
       const handleSave = async () => {
         console.log('Save food:', params.row.foodId, foodName, amharicName);
-        const response = await axios.put(`api/food/${params.row.foodId}`, { foodName, amharicName, price, categoryId });
+        const response = await axios.put(`api/food/:${params.row.foodId}`, { foodName, amharicName, price, categoryId });
 
         if (response.data.success) {
           window.alert(response.data.message);
@@ -43,22 +80,38 @@ const columns = [
         }
       };
 
-      const handleDelete = async () => {
+   const handleDelete = async () => {
         console.log('Delete food:', params.row.foodId);
-        const response = await axios.delete(`api/food/${params.row.foodId}`);
 
-        if (response.data.success) {
+        const response = await axios.delete(`api/food/:${params.row.foodId}`);
+        console.log(response.data);
+        if (response.data.sucess) {
           window.alert(response.data.message);
           fetchData();
         } else {
           console.log(response.data.message);
         }
+       
       };
 
       const handleClose = () => {
         setOpen(false);
       };
 
+      const fetchCategory = async () => {
+        try {
+          const response = await axios.get('api/catagory');
+          const modifiedData = response.data.data.map((food) => ({
+            id: food.categoryId,
+            ...food,
+          }));
+          setCategoryList(modifiedData);
+        } catch (error) {
+          console.error('Error fetching foods:', error);
+        }
+      };
+
+      
       const fetchData = async () => {
         try {
           const response = await axios.get('api/food');
@@ -67,7 +120,7 @@ const columns = [
             ...food,
           }));
           setFoods(modifiedData); // Fix the function name here
-          // console.log(foods);
+          console.log(foods);
         } catch (error) {
           console.error('Error fetching foods:', error);
         }
@@ -100,11 +153,20 @@ const columns = [
               />
               <br/><br/>
               <TextField
-                label="Category ID"
+                select
+                label="Category Name"
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 fullWidth
-              />
+              >
+                {categoryList.map((category) => (
+                  <MenuItem key={category.categoryId} value={category.categoryId}>
+                    {category.categoryName}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+
               <br/><br/>
               <TextField
                 label="Price"

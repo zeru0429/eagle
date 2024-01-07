@@ -23,8 +23,9 @@ const foodController ={
 
    deletefood: async (req,res)=>{
       const id = req.params.id.substring(1);
+      console.log(req.params.id);
       const isDelated = await foodService.deleteSinglefood(id);
-      
+       
       if(!isDelated){
         return  res.status(500).json({
             sucess: false,
@@ -34,7 +35,7 @@ const foodController ={
       }
       res.status(200).json({
          sucess: true,
-         data: "food delated sucessfully"
+         message: "food delated sucessfully"
       })
    
 
@@ -42,8 +43,9 @@ const foodController ={
 
    updatefood: async (req,res)=>{
       const id = req.params.id.substring(1);
-      const {foodName, amharicName , price, categoryId} = req.body;
-      // console.log({foodName, amharicName , price, categoryId} );
+      // console.log(req.body);
+      // const {foodName, amharicName , price, categoryId} = req.body;
+      console.log({foodName, amharicName , price, categoryId} );
 
       if(!foodName || !amharicName || !id || !price || !categoryId){
          return res.status(500).json({

@@ -25,9 +25,11 @@ const foodService = {
  
     },
 
-    updateSinglefood: async (id)=>{
+    updateSinglefood: async (data)=>{
+      console.log(data);
       try{
-       const rows = await query(foodQuery.updateSingleFood,[id]);
+       const rows = await query(foodQuery.updateSingleFood,
+        [data.categoryId, data.foodName, data.amharicName, data.price, data.foodId]);
        return rows;
       }
       catch(e){

@@ -1,27 +1,35 @@
-import React from 'react'
-import res1 from '../../../assets/images/burger.jpeg'
+import React, { useEffect, useState } from 'react'
 import res2 from '../../../assets/images/pizza.jpeg'
 import res3 from '../../../assets/images/spageti.jpeg'
-// import res1 from '../../../assets/images/res_img_5.jpg'
-// import res2 from '../../../assets/images/res_img_6.jpg'
-// import res1 from '../../../assets/images/res_img_3.jpg'
-// import res3 from '../../../assets/images/res_img_8.jpg'
-// import res1 from '../../../assets/images/res_img_4.jpg'
-// import res2 from '../../../assets/images/res_img_2.jpg'
-// import res3 from '../../../assets/images/res_img_7.jpg'
+import res1 from '../../../assets/images/burger.jpeg'
+
+import axios from '../../../util/axios'
 import '../Menu/Menu.css'
 import SingleProduct from '../../Components/single product/SingleProduct'
+
+
 const Menu = () => {
+
+	const [category,setCategory] = useState([]);
+	const [food,setFood] = useState([]);
+
+	useEffect(()=>{
+		const fetchData = async () =>{
+			const response = await 	axios.get('api/food');
+			setFood(response.data.data);
+			const response2 = await 	axios.get('/api/catagory');
+			setCategory(response2.data.data)
+		}
+		fetchData();
+	},[]);
+
+// console.log(food);
+// console.log(category);
   return (
     <>
       <div id="fh5co-menus" data-section="menu" class="menuP">
 			<div class="container">
-				{/* <div class="row  fh5co-heading text-center FoodMenu">
-					<div class="col-md-8 col-md-offset-2">
-						<h2 class="heading to-animate">Food Menu</h2>
-						<p class="sub-heading to-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-					</div>
-				</div> */}
+	
 				<div class="row  fh5co-heading FoodMenu text-center">
 					<div>
 						<p class="fs-2 text-dark">Food Menu</p>

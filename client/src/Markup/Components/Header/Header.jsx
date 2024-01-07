@@ -5,9 +5,10 @@ import Button from '@mui/material/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
-
+import { useStateValue } from "../../../Contexts/stateprovider";
 import { AuthContext } from "../../../Contexts/AuthContext";
 const Header = () => {
+  const [{ basket, user }, dispatch] = useStateValue();
   const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee } =
   useContext(AuthContext);
   const navigator = useNavigate();
@@ -62,6 +63,9 @@ const Header = () => {
               {isLogged && isAdmin && <Nav.Link as={Link} to="/admin/users">Employee</Nav.Link>}
               {isLogged && isAdmin && <Nav.Link as={Link} to="/admin/food">Food</Nav.Link>}
               {isLogged && isAdmin && <Nav.Link as={Link} to="/admin/orders">Orders-List</Nav.Link>}
+              <span className="header__optionLineTwo header__basketCount">
+              {basket.length}
+            </span>
             </Nav>
             <Nav className="ml-auto">
               {isLogged && <Button variant="contained" color="error" onClick={handleLogout}>Logout</Button>}
