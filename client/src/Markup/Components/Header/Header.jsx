@@ -63,9 +63,11 @@ const Header = () => {
               {isLogged && isAdmin && <Nav.Link as={Link} to="/admin/users">Employee</Nav.Link>}
               {isLogged && isAdmin && <Nav.Link as={Link} to="/admin/food">Food</Nav.Link>}
               {isLogged && isAdmin && <Nav.Link as={Link} to="/admin/orders">Orders-List</Nav.Link>}
-              <span className="header__optionLineTwo header__basketCount">
+              <span className="header__optionLineTwo header__basketCount" style={{ marginLeft: '10px', fontWeight: 'bold', color: 'green', fontSize: '18px', backgroundColor: 'white', padding: '5px', borderRadius: '50%' }}>
               {basket.length}
             </span>
+
+
             </Nav>
             <Nav className="ml-auto">
               {isLogged && <Button variant="contained" color="error" onClick={handleLogout}>Logout</Button>}
