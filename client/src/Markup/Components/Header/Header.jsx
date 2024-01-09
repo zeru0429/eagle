@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import { useStateValue } from "../../../Contexts/stateprovider";
 import { AuthContext } from "../../../Contexts/AuthContext";
+import colorLogo from '../../../assets/logo/logo1.png'
 const Header = () => {
   const [{ basket, user }, dispatch] = useStateValue();
   const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee,setEmployee } =
@@ -51,7 +52,19 @@ location.reload();
     <>
         <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand as={Link} to="/">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+          <Container>
+          <Navbar.Brand href="#home">
+            <img
+              src={colorLogo}
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
+        </Container>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
