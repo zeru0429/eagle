@@ -3,6 +3,7 @@ import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Order.css';
 import Orders from '../../Components/Order/Orders';
 import axios from '../../../util/axios'
+import moment from 'moment';
 import { AuthContext } from '../../../Contexts/AuthContext';
 
 const Order = () => {
@@ -11,14 +12,20 @@ const Order = () => {
 
     const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee } =
     useContext(AuthContext);
+
+
+
+
     useEffect(()=>{
         console.log(employee);
         fetchData();
 
     },[])
+
+
     const fetchData = async () => {
         try {
-            console.log("employee id: " +employee.employee_id );
+            // console.log("employee id: " +employee.employee_id );
             const response = await axios.get(`api/order/:${employee.employee_id}`);
             console.log(response.data.data); // Log the response to check the data
             setOrderList(response.data.data);
@@ -27,6 +34,19 @@ const Order = () => {
         }
     }
     
+    const formatDate = (date) => {
+        const today = moment().startOf('day');
+        const yesterday = moment().subtract(1, 'days').startOf('day');
+    
+        if (moment(date).isSame(today, 'd')) {
+          return moment(date).format('LT'); // Display time if it's today
+        } else if (moment(date).isSame(yesterday, 'd')) {
+          return 'Yesterday';
+        } else {
+          return moment(date).format('MMM DD, LT'); // Display date and time for other dates
+        }
+      };
+
 
 // console.log(orderList);
 
@@ -64,14 +84,12 @@ const Order = () => {
                                 key={singleOrder.orderData.orderId}
                                 count={couter++}
                                 username={singleOrder.orderData.username}
-                                date={singleOrder.orderData.createdDate}
+                                date={formatDate(singleOrder.orderData.createdDate)}
                                 waitter={singleOrder.orderData.waiter.fullName}
                                 items={singleOrder.orderData.itemCount}
                                 price={singleOrder.orderData.totalPrice}
                                 detaile={singleOrder.orderData.singleOrders}
                                 />
-
-
                        })}
 
 

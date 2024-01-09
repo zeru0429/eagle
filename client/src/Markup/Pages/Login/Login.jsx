@@ -19,12 +19,12 @@ const Login = () => {
     if (islog) {
       setIsAdmin(islog.employee_role === 'admin');
       setIsLogged(true); // Fix this line
-  
+      console.log(employee);
       if (isLogged && isAdmin) {
-        console.log(employee);
+    
         navigator('/admin/users');
       } else if (isLogged) {
-        console.log("object");
+      //  console.log("object");
         navigator('/');
       }
     }
@@ -42,11 +42,12 @@ const Login = () => {
   };
 
   useEffect(() => {
+    console.log(employee);
     if (isLogged && isAdmin) {
-      console.log(employee);
+     
       navigator('/admin/users');
     } else if (isLogged) {
-      console.log("object");
+      // console.log("object");
       navigator('/');
     }
   }, [isLogged, isAdmin, navigator, employee]);
