@@ -35,12 +35,18 @@ const reducer = (state, action) => {
         ...state,
         basket: newBasket,
     };
-      
 
+    case "SET_AMOUNT":
+      const updatedBasket = state.basket.map((item) =>
+        item.foodId === action.foodId
+          ? { ...item, amount: action.amount }
+          : item
+      );
 
-
-
-
+      return {
+        ...state,
+        basket: updatedBasket,
+      };
 
     default:
       return state;

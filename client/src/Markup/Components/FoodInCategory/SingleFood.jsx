@@ -16,6 +16,7 @@ const SingleFood = (props) => {
         price: props.food.price,
         imageUrl: props.food.imageUrl,
         categoryName: props.food.categoryName,
+        amount: 1
       },
     });
   };

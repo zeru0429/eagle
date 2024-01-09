@@ -1,7 +1,9 @@
 const orderService = require('../services/order.service');
 const orderController ={
    getAllorder: async (req,res)=>{
-      const rows = await orderService.getAllOrder();
+      const id = req.params.id.substring(1);
+      console.log(id);
+      const rows = await orderService.getAllOrder(id);
       res.status(200).json({
          sucess: true,
          data: rows
@@ -76,25 +78,46 @@ const orderController ={
   
 
    createorder: async (req,res)=>{
-    const {orderName, amharicName , price, categoryId} = req.body;
-    if(!orderName || !amharicName || !price || !categoryId){
-      return res.status(500).json({
-         success: false,
-         message: 'all fields are required '
+      const { userId, waiterId, orders, totalItem, totalPrice } = req.body;
+
+      if (!userId || !waiterId || !totalItem || !orders || !totalPrice) {
+        return res.status(500).json({
+          success: false,
+          message: 'All fields are required.',
+        });
+      }
+
+
+      const isOrderAdded = await orderService.createOrder({
+         waiterId,
+         userId,
+         totalItem,
+         totalPrice,
        });
+   
+       if (!isOrderAdded) {
+         return res.status(500).json({
+           success: false,
+           message: 'Failed to add order.',
+         });
+       }
+
+       const orderId = isOrderAdded.insertId;
+
+    for (const element of orders) {
+     // console.log(element.price* element.amount);
+      await orderService.createSingleOrder({
+        orderId,
+        foodId: element.foodId,
+        amount: element.amount,
+        singleTotal: element.price* element.amount,
+      });
     }
 
-    const isorderAdded = await orderService.createSingleOrder(req.body); 
-    if(!isorderAdded){
-     return res.status(500).json({
-         success: false,
-         message: 'fail to add catagory '
-       });
-    }
-    
+
     return res.status(200).json({
       success: true,
-      message: 'catagory added sucessfully'
+      message: 'order completed  sucessfully'
     });
 
      

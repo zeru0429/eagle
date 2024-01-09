@@ -1,11 +1,36 @@
-import React from 'react';
-import imgpizza from '../../../assets/images/pizza.jpeg';
-import imgburger from '../../../assets/images/burger.jpeg';
-import imgspagetii from '../../../assets/images/spageti.jpeg';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Order.css';
 import Orders from '../../Components/Order/Orders';
+import axios from '../../../util/axios'
+import { AuthContext } from '../../../Contexts/AuthContext';
+
 const Order = () => {
+    let couter =1;
+    const [orderList, setOrderList] = useState([]);
+
+    const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee } =
+    useContext(AuthContext);
+    useEffect(()=>{
+        console.log(employee);
+        fetchData();
+
+    },[])
+    const fetchData = async () => {
+        try {
+            console.log("employee id: " +employee.employee_id );
+            const response = await axios.get(`api/order/:${employee.employee_id}`);
+            console.log(response.data.data); // Log the response to check the data
+            setOrderList(response.data.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+    
+
+// console.log(orderList);
+
+
   return (
     <>
       <div className="container-xl">
@@ -16,85 +41,38 @@ const Order = () => {
                         <div className="col-sm-4">
                             <h2>Order <b>Details</b></h2>
                         </div>
-                        <div className="col-sm-8">
-                            <a href="#" className="btn btn-secondary"><i className="material-icons">&#xE24D;</i> <span>Export to
-                                    Excel</span></a>
-                        </div>
+                  
                     </div>
                 </div>
-                <div className="table-filter">
-                    <div className="row">
-                        <div className="col-sm-9">
-                            <div className="filter-group">
-                                <label>Name</label>
-                                <input type="text" className="form-control"/>
-                            </div>
-                            <div className="filter-group">
-                                <label>Status</label>
-                                <select className="form-control">
-                                    <option>Any</option>
-                                    <option>Pending</option>
-                                    <option>Cancelled</option>
-                                </select>
-                            </div>
-                            <span className="filter-icon"><i className="fa fa-filter"></i></span>
-                        </div>
-                    </div>
-                </div>
+              
                 <table className="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Customer</th>
-                            <th>Order Date</th>
-                            <th>Cashir</th>
-                            <th>Net Amount</th>
+                            <th>creatdDate</th>
+                            <th>username</th>
+                            <th>waiter</th>
+                            <th>itemCount</th>
+                            <th>totalPrice</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
+        
+                       {orderList && orderList.map((singleOrder)=>{
+                         return <Orders
+                                key={singleOrder.orderData.orderId}
+                                count={couter++}
+                                username={singleOrder.orderData.username}
+                                date={singleOrder.orderData.createdDate}
+                                waitter={singleOrder.orderData.waiter.fullName}
+                                items={singleOrder.orderData.itemCount}
+                                price={singleOrder.orderData.totalPrice}
+                                detaile={singleOrder.orderData.singleOrders}
+                                />
 
-                        <Orders
-                         resimg={imgpizza}
-                         name="Burger"
-                         date="Jun 15, 2023"
-                         waitter="Abebe"
-                         price="200 Birr"
-                        />
-                        <Orders
-                         resimg={imgpizza}
-                         name="Burger"
-                         date="Jun 15, 2023"
-                         waitter="Abebe"
-                         price="200 Birr"
-                        />
-                        <Orders
-                         resimg={imgpizza}
-                         name="Burger"
-                         date="Jun 15, 2023"
-                         waitter="Abebe"
-                         price="200 Birr"
-                        />
-                        <Orders
-                         resimg={imgpizza}
-                         name="Burger"
-                         date="Jun 15, 2023"
-                         waitter="Abebe"
-                         price="200 Birr"
-                        />
-                        <Orders
-                         resimg={imgpizza}
-                         name="Burger"
-                         date="Jun 15, 2023"
-                         waitter="Abebe"
-                         price="200 Birr"
-                        />
-                        <Orders
-                         resimg={imgpizza}
-                         name="Burger"
-                         date="Jun 15, 2023"
-                         waitter="Abebe"
-                         price="200 Birr"
-                        />
+
+                       })}
 
 
                        

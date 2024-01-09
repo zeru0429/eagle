@@ -4,7 +4,7 @@ const orderRoutes = express.Router();
 const orderController = require('../controllers/order.controller');
 
 // include routes
-orderRoutes.get('/api/order',orderController.getAllorder);
+orderRoutes.get('/api/order/:id',orderController.getAllorder);
 orderRoutes.get('/api/orderInfo',orderController.getAllorderInfo);
 orderRoutes.get('/api/order/:id',orderController.getSingleategory);
 orderRoutes.put('/api/order/:id',orderController.updateorder);

@@ -157,3 +157,49 @@ a:hover {
     background-position-x: 95%;
     background-position-y: center;
 }
+
+
+/* Cart.css */
+.summary-container {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .summary-title {
+    color: #333;
+  }
+  
+  .select-field {
+    margin-bottom: 15px;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .summary-label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .summary-value {
+    color: #333;
+  }
+  
+  .checkout-btn {
+    background-color: #1c1d1d;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .checkout-btn:hover {
+    background-color: #0056b3;
+  }
+  

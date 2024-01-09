@@ -2,9 +2,9 @@ const query = require('../config/db');
 const orderQuery = require('../querys/order.query');
 
 const orderService = {
-   getAllOrder: async ()=>{
+   getAllOrder: async (id)=>{
      try{
-      const rows = await query(orderQuery.getAllOrders);
+      const rows = await query(orderQuery.getAllOrders,[id]);
       return rows;
      }
      catch(e){
@@ -62,8 +62,10 @@ const orderService = {
   },
 
   createSingleOrder: async (data)=>{
+    //orderId, foodId,amount,singleTotal
     try{
-      const rows = await query(orderQuery.createSingleOrders,[data.englishName,data.amharicName]);
+     // console.log(data.orderId, data.foodId,data.amount,data.singleTotal);
+      const rows = await query(orderQuery.createSingleOrders,[data.orderId, data.foodId,data.amount,data.singleTotal]);
       return rows;
     }
     catch(e){
@@ -75,7 +77,7 @@ const orderService = {
 
   createOrder: async (data)=>{
     try{
-      const rows = await query(orderQuery.createOrder,[data.englishName,data.amharicName]);
+      const rows = await query(orderQuery.createOrder,[data.waiterId,data.userId,data.totalItem,data.totalPrice]);
       return rows;
     }
     catch(e){

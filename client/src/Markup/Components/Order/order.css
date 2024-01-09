@@ -1,0 +1,47 @@
+/* Add this CSS in your component or in a separate stylesheet */
+.popup-table {
+   border-collapse: collapse;
+   width: 100%;
+   background-color: #fff;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin-top: 10px; /* Adjust the spacing from the main table */
+ }
+ 
+ .popup-table th,
+ .popup-table td {
+   border: 1px solid #ddd;
+   padding: 8px;
+   text-align: left;
+ }
+ 
+ .popup-table th {
+   background-color: #f2f2f2;
+ }
+ 
+ .popup-table tr:hover {
+   background-color: #f5f5f5;
+ }
+ 
+ .popup-table img {
+   max-width: 50px; /* Adjust the maximum width of the images */
+   border-radius: 50%;
+ }
+ 
+ .popup-table td:first-child {
+   width: 1%;
+   white-space: nowrap;
+ }
+ 
+ .popup-table td:last-child {
+   text-align: right;
+ }
+ 
+ /* Styling for the pop-up arrow */
+ .popup-arrow {
+   cursor: pointer;
+ }
+ 
+ .popup-arrow:hover {
+   color: #007bff; /* Adjust the color on hover */
+ }
+ 
