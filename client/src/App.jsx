@@ -25,15 +25,16 @@ import Category from './Markup/Pages/adminPages/Category'
 import Waiters from './Markup/Pages/adminPages/Waiters'
 import Home from './Markup/Pages/Home'
 // import Waitter from './Markup/Pages/adminPages/Waitter'
-
+import './App.css'
 
 function App() {
 
   return (
     <>
     <Header />
+    <div className='main-main-class'>
+    <div className='main-app'>
     <Routes>
-
     <Route
       path='/'
       element={<> <Home /> </>}
@@ -87,11 +88,6 @@ function App() {
 
 
       {/* admin pages */}
-{/* 
-      <Route
-      path='/drink'
-      element={<>< Employee  /> <Category /> </>}
-      /> */}
 
       <Route
       path='/admin/category'
@@ -127,6 +123,9 @@ function App() {
 
 
     </Routes>
+    </div>
+    
+    </div>
     </>
   )
 }

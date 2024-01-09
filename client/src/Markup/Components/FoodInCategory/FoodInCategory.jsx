@@ -4,18 +4,14 @@ import SingleFood from './SingleFood';
 
 const FoodInCategory = (props) => {
   return (
-    <div className="row row-padded drinkPage">
-      <div className="col-md-5">
-        <div className="fh5co-food-menu to-animate-2">
-          <h3 className="fh5co-drinks">{props.title}</h3>
-          <ul type="none">
-            {props.foods && props.foods.map((singleProduct) => (
-              <li className="Drink" key={singleProduct.foodId}>
-                <SingleFood food={singleProduct} />
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className="container-fluid mt-4">
+      <h3 className="text-center mb-4">{props.title}</h3>
+      <div className="row">
+        {props.foods && props.foods.map((singleProduct) => (
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={singleProduct.foodId}>
+            <SingleFood food={singleProduct} />
+          </div>
+        ))}
       </div>
     </div>
   );

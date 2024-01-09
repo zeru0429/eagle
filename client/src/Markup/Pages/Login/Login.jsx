@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import './Login.css';
 import AuthService from '../../../services/AuthService';
 import { AuthContext } from '../../../Contexts/AuthContext';
-
+import colorLogo from '../../../assets/logo/logo1.png'
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +57,9 @@ const Login = () => {
 
   return (
     <>
+    <div className='loginpage'>
+
+    
       <div className="login-container">
         <h2 className="login-title">Login</h2>
         <form className="login-form" onSubmit={handleSubmit}>
@@ -83,6 +86,7 @@ const Login = () => {
         <p className="login-text">
           Don't have an account? <a href="#" className="login-link">Sign Up</a>
         </p>
+      </div>
       </div>
     </>
   );

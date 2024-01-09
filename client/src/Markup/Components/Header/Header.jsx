@@ -82,10 +82,15 @@ location.reload();
 
 
             </Nav>
-            <Nav className="ml-auto">
-              {isLogged && <Button variant="contained" color="error" onClick={handleLogout}>Logout</Button>}
+            <Nav className="ml-auto mr-3">
+              {isLogged && <Button variant="contained" color="error"  onClick={handleLogout}>Logout</Button>}
+            </Nav>
+            <Nav className="ml-auto mr-5">
+              
             </Nav>
           </Navbar.Collapse>
+          
+    
         </Container>
       </Navbar>
     </>
