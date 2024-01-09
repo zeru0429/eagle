@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [employee, setEmployee] = useState({});
 
-  const value = { isLogged, isAdmin, setIsAdmin, setIsLogged, employee };
+  const value = { isLogged, isAdmin, setIsAdmin, setIsLogged, employee ,setEmployee};
   useEffect(() => {
     const fetchToken = async () => {
       const isEmployee = await employeeAuthHeader();

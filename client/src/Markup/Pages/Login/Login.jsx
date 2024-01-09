@@ -46,9 +46,11 @@ const Login = () => {
     if (isLogged && isAdmin) {
      
       navigator('/admin/users');
+    
     } else if (isLogged) {
       // console.log("object");
       navigator('/');
+    
     }
   }, [isLogged, isAdmin, navigator, employee]);
   

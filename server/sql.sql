@@ -67,6 +67,11 @@ SELECT * FROM singleOrder;
 SELECT * FROM foods;
 SELECT * FROM users;
 
+SELECT * from profile;
+INSERT INTO users (username,password,role) VALUES ('mule','$2b$10$KxrMOkx/NPIiMzgzBnpuHO.y6R2lJrC4TeZHnd/RkEg3ZSHxF4u0O','admin');
+INSERT INTO profile(`userId`,firstname,lastname,gender) VALUES(1,'Muluken','Mengistu','male');
+
+SHOW TABLEs;
    SELECT
    o.orderId,
    so.singleOrderId,
@@ -151,3 +156,6 @@ LEFT JOIN huludeig_order.foods f ON f.foodId = so.foodId
 LEFT JOIN huludeig_order.category c ON c.categoryId = f.categoryId  -- Assuming this column exists in the 'category' table
 WHERE o.userId = 7
 GROUP BY o.orderId;
+
+
+OpenAi@2023

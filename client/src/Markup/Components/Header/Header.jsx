@@ -9,28 +9,28 @@ import { useStateValue } from "../../../Contexts/stateprovider";
 import { AuthContext } from "../../../Contexts/AuthContext";
 const Header = () => {
   const [{ basket, user }, dispatch] = useStateValue();
-  const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee } =
+  const { isLogged, isAdmin, setIsAdmin, setIsLogged, employee,setEmployee } =
   useContext(AuthContext);
   const navigator = useNavigate();
 
 
   const handleLogout = () => {
     // Remove token from local storage
+    setIsLogged(false);
+    setIsAdmin(false);
     localStorage.removeItem('employee');
 
     // Reset authentication state
-    setIsLogged(false);
-    setIsAdmin(false);
+    
     navigator('/login')
+    // Reloads the current page
+location.reload();
   };
 
     useEffect(()=>
     { 
       if(!isLogged){
         navigator('/login');
-      }
-      else{
-       console.log(isAdmin);
       }
 
     },[]);
@@ -40,9 +40,9 @@ const Header = () => {
       if(!isLogged){
         navigator('/login');
       }
-      else{
-       console.log(isAdmin);
-      }
+      // else{
+      //  console.log(isAdmin);
+      // }
 
     },[navigator]);
 
