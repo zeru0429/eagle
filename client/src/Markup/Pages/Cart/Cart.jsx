@@ -73,13 +73,13 @@ const Cart = () => {
        const responce  = await axios.post('api/order',formData);
        console.log(responce.data.message        );
        window.alert(responce.data.message)
-     
+       handlePrint();
        
 
     }catch(e){
       window.alert(e.response.data.message );
     }
-    handlePrint();
+   
   
   
     
@@ -202,6 +202,7 @@ const Cart = () => {
         </MenuItem>
       ))}
     </TextField>
+    <hr />
     <div className="summary-row">
       <div className="summary-label">Total Items</div>
       <div className="summary-value">{totalItem}</div>
@@ -210,7 +211,6 @@ const Cart = () => {
       <div className="summary-label">Total Price</div>
       <div className="summary-value">{totalPrice.toFixed(2)} Birr</div>
     </div>
-    <button className="checkout-btn" onClick={handleCheckout}>CHECKOUT</button>
     <div className="summary-row">
       <div className="summary-label">Cashier</div>
       <div className="summary-value">{employee.employee_first_name}</div>
@@ -223,8 +223,22 @@ const Cart = () => {
       <div className="summary-label">Order Date</div>
       <div className="summary-value">{`${formattedTime} ${formattedDate}`}</div>
     </div>
+    <hr />
+    <div>
+  {basket.map((singleItem) => (
+       <div className="summary-row">
+       <div className="summary-label">{`${singleItem.amharicName} (${singleItem.foodName})`}</div>
+       <div className="summary-value">{singleItem.amount}</div>
+     </div>    
+  ))}
   </div>
+
+  <button className="checkout-btn" onClick={handleCheckout}>CHECKOUT</button>
+  </div>
+
+
 </div>
+
 
         </div>
       </div>

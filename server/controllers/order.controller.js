@@ -79,7 +79,7 @@ const orderController ={
 
    createorder: async (req,res)=>{
       const { userId, waiterId, orders, totalItem, totalPrice } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
 
       if (!userId || !waiterId || !totalItem || !orders || !totalPrice) {
         return res.status(500).json({

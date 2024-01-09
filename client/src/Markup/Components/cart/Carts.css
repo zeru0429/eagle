@@ -1,0 +1,43 @@
+/* Carts.css */
+.cart-item {
+   margin-bottom: 15px;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   overflow: hidden;
+ }
+ 
+ .cart-item img {
+   max-width: 100%;
+   height: auto;
+ }
+ 
+ .row.main {
+   padding: 10px;
+ }
+ 
+ .row.text-muted {
+   font-size: 12px;
+ }
+ 
+ .col.d-flex {
+   justify-content: space-between;
+   align-items: center;
+ }
+ 
+ .cursor-pointer {
+   cursor: pointer;
+ }
+ 
+ .btn-sm {
+   padding: 0.25rem 0.5rem;
+   font-size: 0.875rem;
+ }
+ 
+ .fs-6 {
+   font-size: 0.875rem;
+ }
+ 
+ .close {
+   color: red;
+ }
+ 
